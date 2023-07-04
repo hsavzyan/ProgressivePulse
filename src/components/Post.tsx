@@ -68,51 +68,56 @@ const Post: React.FC<PostProps> = ({
   };
 
   // Return the JSX to render
+  // Return the JSX to render
   return (
     <article className="border p-4 mb-4">
-      {isEditingPost ? (
-        <form onSubmit={handlePostSubmit}>
+      <h2 className="text-2xl mb-2">
+        {isEditingPost ? (
           <input
             type="text"
             value={postTitle}
             onChange={(e) => setPostTitle(e.target.value)}
             className="text-2xl mb-2 w-full p-1 border"
           />
-          <textarea
-            value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
-            className="w-full p-1 border mb-2"
-          />
-          <button
-            type="submit"
-            className="px-2 py-1 bg-blue-500 text-white mr-2"
-          >
-            Save Post
-          </button>
-        </form>
+        ) : (
+          post.title
+        )}
+      </h2>
+      {isEditingPost ? (
+        <textarea
+          value={postContent}
+          onChange={(e) => setPostContent(e.target.value)}
+          className="w-full p-1 border mb-2"
+        />
       ) : (
-        <>
-          <h2 className="text-2xl mb-2">{post.title}</h2>
-          <p>{post.content}</p>
-          <button
-            onClick={() => setIsEditingPost(true)}
-            className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
-          >
-            Edit Post
-          </button>
-        </>
+        <p>{post.content}</p>
+      )}
+      <button
+        onClick={likePost}
+        className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
+      >
+        Like ({post.likes})
+      </button>
+      {isEditingPost ? (
+        <button
+          onClick={handlePostSubmit}
+          className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
+        >
+          Save
+        </button>
+      ) : (
+        <button
+          onClick={() => setIsEditingPost(true)}
+          className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
+        >
+          Edit
+        </button>
       )}
       <button
         onClick={deletePost}
         className="px-2 py-1 bg-red-500 text-white mr-2"
       >
-        Delete Post
-      </button>
-      <button
-        onClick={likePost}
-        className="mt-2 px-2 py-1 bg-blue-500 text-white"
-      >
-        Like Post ({post.likes})
+        Delete
       </button>
       <div className="mt-4">
         {post.comments.map((comment) => (
@@ -131,14 +136,14 @@ const Post: React.FC<PostProps> = ({
               onClick={() => likeComment(comment.id)}
               className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
             >
-              Like Comment ({comment.likes})
+              Like ({comment.likes})
             </button>
             {commentToEdit?.id === comment.id ? (
               <button
                 onClick={handleCommentSubmit}
                 className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
               >
-                Save Comment
+                Save
               </button>
             ) : (
               <button
@@ -148,14 +153,14 @@ const Post: React.FC<PostProps> = ({
                 }}
                 className="mt-2 px-2 py-1 bg-blue-500 text-white mr-2"
               >
-                Edit Comment
+                Edit
               </button>
             )}
             <button
               onClick={() => deleteComment(comment.id)}
               className="mt-2 px-2 py-1 bg-red-500 text-white"
             >
-              Delete Comment
+              Delete
             </button>
           </div>
         ))}
@@ -172,7 +177,7 @@ const Post: React.FC<PostProps> = ({
               className="w-full p-1 border mb-2"
             />
             <button type="submit" className="px-2 py-1 bg-blue-500 text-white">
-              Add Comment
+              Add{" "}
             </button>
           </form>
         )}

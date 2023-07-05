@@ -70,7 +70,7 @@ const Post: React.FC<PostProps> = ({
   // Return the JSX to render
   return (
     <article className="border p-4 mb-4 bg-white rounded-lg shadow-xl">
-      <h2 className="text-2xl mb-2 font-semibold text-purple-800">
+      <h2 className="text-2xl mb-2 font-semibold text-amber-800">
         {isEditingPost ? (
           <input
             type="text"
@@ -94,28 +94,28 @@ const Post: React.FC<PostProps> = ({
       <div className="flex items-center space-x-2 mt-2">
         <button
           onClick={likePost}
-          className="px-2 py-1 bg-purple-500 text-white rounded shadow"
+          className="px-2 py-1 bg-amber-500 text-white rounded shadow"
         >
           Like ({post.likes})
         </button>
         {isEditingPost ? (
           <button
             onClick={handlePostSubmit}
-            className="px-2 py-1 bg-green-500 text-white rounded shadow"
+            className="px-2 py-1 bg-green-700 text-white rounded shadow"
           >
             Save
           </button>
         ) : (
           <button
             onClick={() => setIsEditingPost(true)}
-            className="px-2 py-1 bg-yellow-500 text-white rounded shadow"
+            className="px-2 py-1 bg-blue-700 text-white rounded shadow"
           >
             Edit
           </button>
         )}
         <button
           onClick={deletePost}
-          className="px-2 py-1 bg-red-500 text-white rounded shadow"
+          className="px-2 py-1 bg-red-700 text-white rounded shadow"
         >
           Delete
         </button>
@@ -132,20 +132,20 @@ const Post: React.FC<PostProps> = ({
                   className="w-full p-2 border rounded mb-2 shadow-inner"
                 />
               ) : (
-                <p className="text-purple-800">{comment.content}</p>
+                <p className="text-amber-800">{comment.content}</p>
               )}
             </div>
             <div className="flex items-center space-x-2 mt-2">
               <button
                 onClick={() => likeComment(comment.id)}
-                className="px-2 py-1 bg-purple-500 text-white rounded shadow"
+                className="px-2 py-1 bg-amber-500 text-white rounded shadow"
               >
                 Like ({comment.likes})
               </button>
               {commentToEdit?.id === comment.id ? (
                 <button
                   onClick={handleCommentSubmit}
-                  className="px-2 py-1 bg-green-500 text-white rounded shadow"
+                  className="px-2 py-1 bg-green-700 text-white rounded shadow"
                 >
                   Save
                 </button>
@@ -155,14 +155,14 @@ const Post: React.FC<PostProps> = ({
                     setCommentToEdit(comment);
                     setEditedComment(comment.content);
                   }}
-                  className="px-2 py-1 bg-yellow-500 text-white rounded shadow"
+                  className="px-2 py-1 bg-blue-700 text-white rounded shadow"
                 >
                   Edit
                 </button>
               )}
               <button
                 onClick={() => deleteComment(comment.id)}
-                className="px-2 py-1 bg-red-500 text-white rounded shadow"
+                className="px-2 py-1 bg-red-700 text-white rounded shadow"
               >
                 Delete
               </button>
@@ -171,7 +171,7 @@ const Post: React.FC<PostProps> = ({
         ))}
         {!commentToEdit && (
           <form onSubmit={handleCommentSubmit} className="mt-4">
-            <label htmlFor="comment" className="block mb-1 text-purple-800">
+            <label htmlFor="comment" className="block mb-1 text-amber-800">
               Add a comment
             </label>
             <input
@@ -183,7 +183,7 @@ const Post: React.FC<PostProps> = ({
             />
             <button
               type="submit"
-              className="px-2 py-1 bg-purple-500 text-white rounded shadow"
+              className="px-2 py-1 bg-amber-500 text-white rounded shadow"
             >
               Add Comment
             </button>

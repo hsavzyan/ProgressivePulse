@@ -24,7 +24,12 @@ type PostType = {
   comments: CommentType[];
 };
 
-const ProtectedRoute = ({ children }) => {
+type ProtectedRouteProps = {
+  children: React.ReactNode;
+  path: string;
+};
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, path }) => {
   const { currentUser } = useAuthContext();
   const navigate = useNavigate();
 
@@ -342,7 +347,7 @@ const App: React.FC = () => {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute path="/profile">
                 <Profile />
               </ProtectedRoute>
             }

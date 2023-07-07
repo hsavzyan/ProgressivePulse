@@ -48,7 +48,11 @@ export const useAuth = () => {
   };
 };
 
-export const AuthProvider: React.FC = ({ children }) => {
+type AuthProviderProps = {
+  children: React.ReactNode;
+};
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const auth = useAuth();
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };

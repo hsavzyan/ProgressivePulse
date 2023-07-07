@@ -1,4 +1,5 @@
-import Post from "./Post"; // Import the Post component
+import Post from "./Post";
+import { Link } from "react-router-dom"; // Import the Post component
 
 // Define the type for a comment
 type CommentType = {
@@ -42,6 +43,15 @@ const Posts: React.FC<PostsProps> = ({
   // Return the JSX to render
   return (
     <div>
+      <div className="mb-4">
+        <Link
+          to="/newpost"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Create New Post
+        </Link>
+      </div>
+
       {posts.map((post) => (
         <Post
           key={post.id}

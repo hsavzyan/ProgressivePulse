@@ -180,7 +180,7 @@ const App: React.FC = () => {
       likes: 0,
       comments: [],
     };
-    setPosts([...posts, newPost]);
+    setPosts([newPost, ...posts]);
   };
 
   // Define a function to like a post
@@ -340,6 +340,7 @@ const App: React.FC = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/newpost" element={<NewPost addPost={addPost} />} />
+          <Route path="/posts" element={<PostsWrapper />} />
           <Route path="/" element={<PostsWrapper />} />
           <Route
             path="/profile"

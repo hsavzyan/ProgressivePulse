@@ -342,8 +342,14 @@ const App: React.FC = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/newpost" element={<NewPost addPost={addPost} />} />
-          <Route path="/posts" element={<PostsWrapper />} />
-          <Route path="/" element={<PostsWrapper />} />
+          <Route
+            path="/posts"
+            element={
+              <ProtectedRoute>
+                <PostsWrapper />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/profile"
             element={
@@ -352,6 +358,7 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/" element={<SignIn />} />
         </Routes>
       </main>
       <Footer />

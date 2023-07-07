@@ -1,3 +1,5 @@
+import { auth } from "../firebase";
+import { sendPasswordResetEmail } from "firebase/auth"; // Import the sendPasswordResetEmail function
 import { useState } from "react";
 import { useAuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +18,15 @@ const SignIn: React.FC = () => {
       navigate("/posts"); // navigate to the posts page after signing in
     } catch (error) {
       setError("Failed to sign in");
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset email sent!");
+    } catch (error) {
+      setError("Failed to send password reset email");
     }
   };
 
@@ -62,6 +73,13 @@ const SignIn: React.FC = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Sign In
+          </button>
+          <button
+            type="button"
+            onClick={handlePasswordReset}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            Forgot password?
           </button>
         </div>
       </form>

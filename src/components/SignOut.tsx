@@ -1,11 +1,14 @@
 import { useAuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom"; // import useNavigate
 
 const SignOut: React.FC = () => {
   const { signout } = useAuthContext();
+  const navigate = useNavigate(); // initialize useNavigate
 
   const handleSignOut = async () => {
     try {
       await signout();
+      navigate("/signin"); // navigate to the sign-in page after signing out
     } catch (error) {
       console.error("Failed to sign out");
     }

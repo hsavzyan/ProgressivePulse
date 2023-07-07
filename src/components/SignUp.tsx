@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useAuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom"; // import useNavigate
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { signup } = useAuthContext();
+  const navigate = useNavigate(); // initialize useNavigate
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       await signup(email, password);
+      navigate("/posts"); // navigate to the posts page after signing up
     } catch (error) {
       setError("Failed to create an account");
     }

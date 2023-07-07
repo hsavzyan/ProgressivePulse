@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useAuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { signin } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       await signin(email, password);
+      navigate("/posts"); // navigate to the posts page after signing in
     } catch (error) {
       setError("Failed to sign in");
     }

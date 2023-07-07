@@ -312,27 +312,29 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
-      <nav className="bg-blue-500 p-6">
-        {!currentUser && (
-          <>
-            <Link to="/signup" className="text-white mr-4">
-              Sign Up
-            </Link>
-            <Link to="/signin" className="text-white mr-4">
-              Sign In
-            </Link>
-          </>
-        )}
-        {currentUser && (
-          <>
-            <Link to="/profile" className="text-white mr-4">
-              Profile
-            </Link>
-            <Link to="/signout" className="text-white mr-4">
-              Sign Out
-            </Link>
-          </>
-        )}
+      <nav className="bg-indigo-500 p-6">
+        <div className="max-w-2xl mx-auto">
+          {!currentUser && (
+            <>
+              <Link to="/signup" className="text-white mr-4">
+                Sign Up
+              </Link>
+              <Link to="/signin" className="text-white mr-4">
+                Sign In
+              </Link>
+            </>
+          )}
+          {currentUser && (
+            <>
+              <Link to="/profile" className="text-white mr-4">
+                Profile
+              </Link>
+              <Link to="/signout" className="text-white mr-4">
+                Sign Out
+              </Link>
+            </>
+          )}
+        </div>
       </nav>
       <main className="flex-grow p-4">
         <Routes>

@@ -69,7 +69,7 @@ const Post: React.FC<PostProps> = ({
 
   // Return the JSX to render
   return (
-    <article className="border p-4 mb-4 bg-blue-50 rounded-lg shadow-xl">
+    <article className="border p-4 mb-4 bg-blue-50 rounded-lg shadow-xl max-w-5xl mx-auto">
       <h2 className="text-2xl mb-2 font-semibold text-blue-700">
         {isEditingPost ? (
           <input

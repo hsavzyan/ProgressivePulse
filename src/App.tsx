@@ -310,7 +310,6 @@ const App: React.FC = () => {
       editComment={editComment}
     />
   );
-
   // Return the JSX to render
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">

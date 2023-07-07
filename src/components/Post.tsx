@@ -69,8 +69,8 @@ const Post: React.FC<PostProps> = ({
 
   // Return the JSX to render
   return (
-    <article className="border p-4 mb-4 bg-white rounded-lg shadow-xl">
-      <h2 className="text-2xl mb-2 font-semibold text-amber-800">
+    <article className="border p-4 mb-4 bg-blue-50 rounded-lg shadow-xl">
+      <h2 className="text-2xl mb-2 font-semibold text-blue-700">
         {isEditingPost ? (
           <input
             type="text"
@@ -94,7 +94,7 @@ const Post: React.FC<PostProps> = ({
       <div className="flex items-center space-x-2 mt-2">
         <button
           onClick={likePost}
-          className="px-2 py-1 bg-amber-500 text-white rounded shadow"
+          className="px-2 py-1 bg-purple-500 text-white rounded shadow"
         >
           Like ({post.likes})
         </button>
@@ -123,7 +123,7 @@ const Post: React.FC<PostProps> = ({
       <div className="mt-4 space-y-4">
         {post.comments.map((comment) => (
           <div key={comment.id} className="space-y-2">
-            <div className="border p-2 rounded bg-gray-100 shadow-inner">
+            <div className="border p-2 rounded bg-purple-50 shadow-inner">
               {commentToEdit?.id === comment.id ? (
                 <input
                   type="text"
@@ -132,13 +132,13 @@ const Post: React.FC<PostProps> = ({
                   className="w-full p-2 border rounded mb-2 shadow-inner"
                 />
               ) : (
-                <p className="text-amber-800">{comment.content}</p>
+                <p className="text-blue-800">{comment.content}</p>
               )}
             </div>
             <div className="flex items-center space-x-2 mt-2">
               <button
                 onClick={() => likeComment(comment.id)}
-                className="px-2 py-1 bg-amber-500 text-white rounded shadow"
+                className="px-2 py-1 bg-purple-500 text-white rounded shadow"
               >
                 Like ({comment.likes})
               </button>
@@ -171,7 +171,7 @@ const Post: React.FC<PostProps> = ({
         ))}
         {!commentToEdit && (
           <form onSubmit={handleCommentSubmit} className="mt-4">
-            <label htmlFor="comment" className="block mb-1 text-amber-800">
+            <label htmlFor="comment" className="block mb-1 text-blue-800">
               Add a comment
             </label>
             <input
@@ -183,7 +183,7 @@ const Post: React.FC<PostProps> = ({
             />
             <button
               type="submit"
-              className="px-2 py-1 bg-amber-500 text-white rounded shadow"
+              className="px-2 py-1 bg-purple-500 text-white rounded shadow"
             >
               Add Comment
             </button>

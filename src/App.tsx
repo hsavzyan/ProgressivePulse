@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Posts from "./components/Posts";
 import NewPost from "./components/NewPost";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
+import Profile from "./components/Profile";
+import SignOut from "./components/SignOut";
+import { useAuthContext } from "./AuthContext";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 
 type CommentType = {
   id: number;
@@ -18,7 +24,23 @@ type PostType = {
   comments: CommentType[];
 };
 
+const ProtectedRoute = ({ children }) => {
+  const { currentUser } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/signin");
+    }
+  }, [currentUser, navigate]);
+
+  return currentUser ? children : null;
+};
+
 const App: React.FC = () => {
+  const { currentUser } = useAuthContext();
+  const navigate = useNavigate();
+
   const initialPosts: PostType[] = [
     {
       id: 1,
@@ -271,22 +293,61 @@ const App: React.FC = () => {
     );
   };
 
+  const PostsWrapper = () => (
+    <Posts
+      posts={posts}
+      likePost={likePost}
+      likeComment={likeComment}
+      addComment={addComment}
+      deletePost={deletePost}
+      deleteComment={deleteComment}
+      editPost={editPost}
+      editComment={editComment}
+    />
+  );
+
   // Return the JSX to render
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
+      <nav className="bg-blue-500 p-6">
+        {!currentUser && (
+          <>
+            <Link to="/signup" className="text-white mr-4">
+              Sign Up
+            </Link>
+            <Link to="/signin" className="text-white mr-4">
+              Sign In
+            </Link>
+          </>
+        )}
+        {currentUser && (
+          <>
+            <Link to="/profile" className="text-white mr-4">
+              Profile
+            </Link>
+            <Link to="/signout" className="text-white mr-4">
+              Sign Out
+            </Link>
+          </>
+        )}
+      </nav>
       <main className="flex-grow p-4">
-        <NewPost addPost={addPost} />
-        <Posts
-          posts={posts}
-          likePost={likePost}
-          likeComment={likeComment}
-          addComment={addComment}
-          deletePost={deletePost}
-          deleteComment={deleteComment}
-          editPost={editPost}
-          editComment={editComment}
-        />
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/newpost" element={<NewPost addPost={addPost} />} />
+          <Route path="/" element={<PostsWrapper />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
       </main>
       <Footer />
     </div>

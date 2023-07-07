@@ -26,10 +26,9 @@ type PostType = {
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
-  path: string;
 };
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, path }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { currentUser } = useAuthContext();
   const navigate = useNavigate();
 
@@ -44,7 +43,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, path }) => {
 
 const App: React.FC = () => {
   const { currentUser } = useAuthContext();
-  const navigate = useNavigate();
 
   const initialPosts: PostType[] = [
     {
@@ -346,7 +344,7 @@ const App: React.FC = () => {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute path="/profile">
+              <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
             }
